@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale =1.0">
+    
+    <title>PDF CV Builder</title>
+
+    <!-- Add Google Fonts -->
+    <link href="" rel="stylesheet">
+
+    <!-- Add Style Sheet -->
+    <link rel="stylesheet" type="text/css" href="">
+
+</head>
+<body>
+    <h1>PDF CV Builder</h1>
+    <p>Fill in your details below and click <span>create</span> to create your PDF CV and have it sent to you via email.</p>
+    
+    <form>
+        <!-- Header -->
+        <div id="summaryDetails">
+            <!-- First name -->
+            <div id="firstname">
+                <label for="firstname">First Name:</label>
+                <input type="text" name="firstnames" autocomplete='given-name'  required>
+                <input type="text" name="firstnames" autocomplete='given-name'  required>
+
+                <input type="text" name="firstnames" autocomplete='given-name'  required>
+
+            </div>    
+                
+            <!-- Last name -->
+            <div id="lastname">
+                <label for="lastname">Last Name:</label>
+                <input type="text" name="lastname" autocomplete='family-name'  required>
+            </div>
+        
+            <!-- Nationality -->
+            <div id="nationality">
+                <label for="nationality">Nationality:</label>
+                <select name="nationality" autocomplete='country-name'>
+                  <option value="Birtish">British</option>
+                  <option value="German">German</option>
+                  <option value="Spanish">Spanish</option>
+                  <option value="French">French</option>
+                </select>
+            </div>
+
+            <!-- Email -->
+            <div id="email">
+                <label for="email">Email:</label>
+                <input type="email" name="email" autocomplete='email'  required>
+            </div>
+
+            <!-- Telephone Number -->
+            <div id="telephone">
+                <label for="telephone">Telephone No:</label>
+                <input type="tel" name="telephone" autocomplete='tel-national'>
+            </div>
+        
+            <!-- Address -->
+            <div id="address">
+                <div id="houseNo">
+                    <label for="houseNo">House Number:</label>
+                    <input type="text" name="houseNo">
+                </div>
+                
+                <div id="street">
+                    <label for="street">Street Name:</label>
+                    <input type="text" name="street" autocomplete='address-line1'>
+                </div>
+
+                <div id="city">
+                    <label for="city">City:</label>
+                    <input type="text" name="city" autocomplete='address-level2'>
+                </div>
+        
+                <div id="postcode">
+                    <label for="postcode">Post Code:</label>
+                    <input type="text" name="postcode" autocomplete='postal-code'>
+                </div>
+            </div>
+
+            <!-- DOB -->
+            <div id="birthdate">
+                <label for="birthdate">DOB:</label>
+                <input type="date" name="birthdate">
+            </div>
+
+            <!-- Driving Liscence -->
+            <div id="drivingLiscence">
+                <h4>Driving Liscence details:</h4>
+                <label for="issuingCountry">Country of issue:</label>
+                    <select name="issuingCountry" autocomplete='country-name'>
+                      <option value="UK">UK</option>
+                      <option value="Germany">Germany</option>
+                      <option value="Spain">Spin</option>
+                      <option value="France">France</option>
+                    </select> 
+                <label for="typeOfLiscence">Type of Liscence:</label>
+                <select name="typeOfLiscence">
+                    <option value="A">A</option>
+                    <option value="A1">A1</option>
+                    <option value="B">B</option>
+                    <option value="BE">BE</option>
+                    <option value="C1">C1</option>
+                    <option value="C1E">C1E</option>
+                    <option value="C">C</option>
+                    <option value="CE">CE</option>
+                    <option value="D1">D1</option>
+                    <option value="D1E">D1E</option>
+                    <option value="D">D</option>
+                    <option value="DE">DE</option>
+                </select> 
+                <a href="https://en.wikipedia.org/wiki/European_driving_licence" target="_blank"><h6>For more information on European Driving Liscence Categories click here.</h6></a>
+            </div>
+        
+            <!-- Photograph -->
+            <div id="photograph">
+                <label for="photograph">Choose file to upload</label>
+                <input type="file" name="photograph" accept="image/*">
+            </div>
+        
+            <!-- Summary -->
+            <div id="PersonalitySummary">
+                <label for="personalitySummary">Personality Summary</label>
+                <input type="textarea" name="personalitySummary" required>
+            </div>
+        </div><!-- Header -->
+        
+        <!-- Professional Experience -->
+        <div id="professionalExp">
+            <!-- positions -->
+            <div class="positions">
+                <!-- Date -->
+                <label for="startdate_p1">Start Date:</label>
+                <input type="date" name="startdate_p1">
+                <label for="enddate_1">End Date:</label>
+                <input type="date" name="enddate_p1">
+
+                <!-- Company -->
+                <label for="company_p1">Company:</label>
+                <input type="text" name="company_p1" autocomplete='organization'>
+
+                <!-- Position -->
+                <label for="position_p1">Position:</label>
+                <input type="text" name="position_p1">
+            </div>
+        </div><!-- Professional Experience -->
+        <button class="" id="addAnotherPosition">Add another Position</button>
+        
+        <!-- Education -->
+        <div id="education">
+            <!-- qualifications -->
+            <div class="qualifications">
+                <!-- Date -->
+                <label for="startdate_e1">Start Date:</label>
+                <input type="date" name="startdate_e1">
+                <label for="enddate_e1">End Date:</label>
+                <input type="date" name="enddate_e1">
+
+                <!-- Qualification -->
+                <label for="qualification_e1">Qualification:</label>
+                <input type="text" name="qualification_e1">    
+
+                <!-- Institute -->
+                <label for="institute_e1">Educational Institute:</label>
+                <input type="text" name="institute_e1">
+
+                <!-- Grade -->
+                <label for="grade_e1">Company:</label>
+                <input type="text" name="grade_e1">
+            </div>
+        </div> <!-- Education -->
+        <button class="" id="addAnotherQualification">Add another Qualification</button>
+        
+        <!-- Languages -->
+        <div id="languages">
+            <!-- Languages -->
+            <div class="languages">
+                <label for="language_l1">Language:</label>
+                <input type="text" name="language_l1">
+
+                <!-- Skill Level -->
+                <label for="languageSkillLevel_l1">Type of Liscence:</label>
+                <select name="languageSkillLevel_l1">
+                    <option value="beginner">Beginner</option>
+                    <option value="conversational">Conversational</option>
+                    <option value="business">Business</option>
+                    <option value="fluent">Fluent</option>
+                    <option value="native">Native</option>
+                </select>
+            </div>
+        </div>    
+        <button class="" id="addLanguage">Add another Language</button>
+        
+        <!-- Computer Skills -->
+        <div id="computerSkills"> 
+            <!-- Programmes -->
+            <div class="programmes">
+                <label for="programme_cp1">Computer programme 1:</label>
+                <input type="text" name="programme_cp1">
+    
+                <!-- Skill Level --> 
+                <label for="programmeSkillLevel_cp1">Skill Level:</label>
+                <select name="programmeSkillLevel_cp1">
+                    <option value="beginner">Beginner</option>
+                    <option value="intermediate">Intermediate</option>
+                    <option value="advanced">Advanced</option>
+                </select> 
+            </div>
+        </div> 
+        <button class="" id="addProgramme">Add another Programme</button>
+        
+        <div>
+            <!-- Reset Button -->
+            <input type="reset">
+
+            <!-- Submit Button -->
+            <input type="submit" value="Submit">
+        </div>
+        <button id="test">Test</button>
+    </form>
+    
+    <script type="text/javascript" src="main.js"></script>
+</body>
+</html>
