@@ -2,7 +2,7 @@
     
     'use strict';
 
-    var php = 'php/main.php',                                                   // Path to PHP file
+    var php = 'main.php',                                                   // Path to PHP file
         req = new XMLHttpRequest(),                                             // New AJAX request Object
         formData = new FormData(),                                              // Form Data for AJAX request
         firstnames = document.getElementsByName('firstnames'),                   // HTML element for firstname Field
@@ -26,7 +26,38 @@
         addLanguage = document.getElementById('addLanguage'),                   // HTML Button element for adding Languages
         addProgramme = document.getElementById('addProgramme'),                 // HTML Button element for adding Computer Programmes
         
-        CV,
+        //CV = {},                                                              // Initial CV Object to filled by user info. Need to uncomment when test data below is deleted.
+        
+                                                                                // Temporary CV Object info for testing, this will be overwritten if form is submitted and should be removed before deploy!!
+        CV = {
+            address:        {houseNo: "11", street: "Weserstraße", city: "Berlin", postcode: "12047"},
+            dob:    	   "1985-12-02",
+            education:      [
+                                {startDate: "2005-09-01", endDate: "2005-09-01", qualification: "BA Honours Media Production", institute: "Northumbria Univeristy", grade: "First"}, 
+                                {startDate: "2004-09-01", endDate: "2004-09-01", qualification: "Art Foundation", institute: "Leeds Art College", grade: "Pass with Merit"}
+                            ],
+            email:          "onlinegurl@gmail.com",
+            firstname:      "Jessica Jessica Jessica",
+            languages:      [
+                                {Language: "German", skillLevel: "conversational"},
+                                {Language: "English", skillLevel: "native"}
+                            ],
+            lastname:       "Greene",
+            liscence:       {type: "B", issuer: "UK"},
+            nationality:    "Birtish",
+            professionExp:  [
+                                {startDate: "2012-09-01", endDate: "0007-05-01", company: "THE BARN GmbH", position: "Head Roaster & Production Managaer"},
+                                {startDate: "2006-04-01", endDate: "2011-10-01", company: "Freelance (Self Employed)", position: "Camera Assistant"}
+                            ],
+            programmes:     [
+                                {programme: "PHP", skillLevel: "intermediate"},
+                                {programme: "JavaScript", skillLevel: "intermediate"},
+                                {programme: "Python", skillLevel: "beginner"},
+                                {programme: "", skillLevel: "beginner"}
+                            ],
+            summary:        "",
+            tel:            "+4917639956647",
+        },
                                                                                 //Create and Add Professional Exp Class
         AddprofessionalExp = function() {
             var ID = professionalExpField.childElementCount + 1,                // Id of skill
@@ -84,9 +115,9 @@
                 
                 var startdate = "startdate_e" + ID,
                     enddate = "enddate_e" + ID,
-                    qualification = "company_e" + ID,
-                    institute = "position_e" + ID,
-                    grade = "position_e" + ID,
+                    qualification = "qualification_e" + ID,
+                    institute = "institute_e" + ID,
+                    grade = "grade_e" + ID,
                 
                     startdateLabel = entry.getElementsByTagName('label')[0],
                     startdateInput = entry.getElementsByTagName('input')[0],
@@ -203,9 +234,9 @@
                     // Create a new object to temporary contain the data for each professional Experience, this is initialised as empty after each loop
                     var newPosition = {};
                     newPosition['startDate']    = document.getElementsByName('startdate_p' + i)[0].value;
-                    newPosition['endDate']      = document.getElementsByName('startdate_p' + i)[0].value;
-                    newPosition['company']      = document.getElementsByName('startdate_p' + i)[0].value;
-                    newPosition['position']     = document.getElementsByName('startdate_p' + i)[0].value;
+                    newPosition['endDate']      = document.getElementsByName('enddate_p' + i)[0].value;
+                    newPosition['company']      = document.getElementsByName('company_p' + i)[0].value;
+                    newPosition['position']     = document.getElementsByName('position_p' + i)[0].value;
                     // Push new Professional Exp Object to Professional Exp Array
                     professionalExp.push(newPosition);
                 }
@@ -218,7 +249,7 @@
                 var i,                                                          // Counting number value for FOR loop
                     education = [];                                       // Array to hold all Education Objects
                 
-                for(i=1; i < professionalExpField.childElementCount+1; i++) {
+                for(i=1; i < educationField.childElementCount+1; i++) {
                     // Create a new object to temporary contain the data for each professional Experience, this is initialised as empty after each loop
                     var newQualification = {};
                     newQualification['startDate']  = document.getElementsByName('startdate_e' + i)[0].value;
@@ -239,14 +270,14 @@
                 var i,                                                          // Counting number value for FOR loop
                     languages = [];                                             // Array to hold Language Objects
                 
-                for(i=1; i < professionalExpField.childElementCount+1; i++) {
+                for(i=1; i < languagesField.childElementCount+1; i++) {
                     // Create a new object to temporary contain the data for each Language, this is initialised as empty after each loop
                     var newLanguage = {};
-                    newLanguage['Language']      = document.getElementsByName('startdate_p' + i)[0].value;
+                    newLanguage['Language']      = document.getElementsByName('language_l' + i)[0].value;
                     newLanguage['skillLevel']    = document.getElementsByName('languageSkillLevel_l' + i)[0].value;
                     
                     // Push new Language Object to Languages Array
-                    languages.push(newPosition);
+                    languages.push(newLanguage);
                 }
                 
                 // Return Array with all Professional Exp Objects inside it
@@ -261,8 +292,8 @@
                 for(i=1; i < programmesField.childElementCount+1; i++) {
                     // Create a new object to temporary contain the data for each Computer Skill, this is initialised as empty after each loop
                     var newProgramme = {};
-                    newPosition['programme']      = document.getElementsByName('programme_cp' + i)[0].value;
-                    newPosition['skillLevel']     = document.getElementsByName('programmeSkillLevel_cp' + i)[0].value;
+                    newProgramme['programme']      = document.getElementsByName('programme_cp' + i)[0].value;
+                    newProgramme['skillLevel']     = document.getElementsByName('programmeSkillLevel_cp' + i)[0].value;
 
                     // Push new Computer Skills Object to Computer Skills Array
                     computerSkills.push(newProgramme);
@@ -300,7 +331,25 @@
             return cv;                                                      // return CV Object
         };
 
+    function sendRequest(type, data) {
+        // Request Type (incase multiple)
+        formData.set('request', type);
+        // CV in this case
+        formData.set('data', data);
+        // Connection to PHP open
+        req.open('POST', php, true);
+        //  Send the Request with CV stored in it
+        req.send(formData);
+    }
 
+     function RequestState(evt) {
+        //  wenn Anfrage beendet und Antwort bereit (readystate = 4) und geladen (status = 200) ist
+        if (evt.target.readyState === 4 && evt.target.status === 200) {
+            window.console.log(this.responseText);
+        }
+     }
+
+req.addEventListener('readystatechange', RequestState);
 // Click Event to add new Professional Exp
     addPosition.addEventListener('click', function(e){
         e.preventDefault();
@@ -340,6 +389,9 @@
                                                                                 // Click Event to Test creation of CV
     document.getElementById('test').addEventListener('click', function(e){
         e.preventDefault();
-        CV = CreateCV();
+        window.console.log("test");
+        sendRequest(1, CV)
+        //CV = CreateCV();
     });
-    
+
+//});
