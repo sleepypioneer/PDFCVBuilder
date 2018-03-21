@@ -2,10 +2,11 @@
     
     'use strict';
 
-    var php = 'main.php',                                                   // Path to PHP file
+    var php = 'main.php',                                                       // Path to PHP file
         req = new XMLHttpRequest(),                                             // New AJAX request Object
         formData = new FormData(),                                              // Form Data for AJAX request
-        firstnames = document.getElementsByName('firstnames'),                   // HTML element for firstname Field
+        upload = document.querySelector('input[type="file"]'),
+        firstnames = document.getElementsByName('firstnames'),                  // HTML element for firstname Field
         surname = document.getElementsByName('lastname')[0],                    // HTML element for lasttname Field
         nationality = document.getElementsByName('nationality')[0],             // HTML element for NationalityField
         email = document.getElementsByName('email')[0],                         // HTML element for Email Field
@@ -247,7 +248,7 @@
             
             function collectEducation(){
                 var i,                                                          // Counting number value for FOR loop
-                    education = [];                                       // Array to hold all Education Objects
+                    education = [];                                             // Array to hold all Education Objects
                 
                 for(i=1; i < educationField.childElementCount+1; i++) {
                     // Create a new object to temporary contain the data for each professional Experience, this is initialised as empty after each loop
@@ -328,14 +329,20 @@
             cv['languages']     = collectLanguages();
             cv['programmes']    = collectComputerSkills();
             
-            return cv;                                                      // return CV Object
+            return cv;                                                                 // return CV Object
         };
 
-    function sendRequest(type, data) {
+    function sendRequest(type, data, file) {
         // Request Type (incase multiple)
         formData.set('request', type);
         // CV in this case
-        formData.set('data', data);
+        formData.set('data', JSON.stringify(data));
+        // CV in this case
+        if(file) {
+            formData.set('photograph', file, file.name);
+        } else {
+            formData.set('photograph', '');
+        }
         // Connection to PHP open
         req.open('POST', php, true);
         //  Send the Request with CV stored in it
@@ -359,7 +366,7 @@ req.addEventListener('readystatechange', RequestState);
             window.console.log("maximum amount of Positions added");
         }
     });
-                                                                                // Click Event to add new Professional Exp
+                                                                                        // Click Event to add new Professional Exp
     addQualification.addEventListener('click', function(e){
         e.preventDefault();
         if (educationField.childElementCount < 9){
@@ -368,7 +375,7 @@ req.addEventListener('readystatechange', RequestState);
             window.console.log("maximum amount of Positions added");
         }
     });
-                                                                                // Click Event to add new Language Skill
+                                                                                        // Click Event to add new Language Skill
     addLanguage.addEventListener('click', function(e){
         e.preventDefault();
         if (languagesField.childElementCount < 9){
@@ -377,7 +384,7 @@ req.addEventListener('readystatechange', RequestState);
             window.console.log("maximum amount of Positions added");
         }
     });
-                                                                                // Click Event to add new Computer Programme
+                                                                                        // Click Event to add new Computer Programme
     addProgramme.addEventListener('click', function(e){
         e.preventDefault();
         if (programmesField.childElementCount < 9){
@@ -386,11 +393,18 @@ req.addEventListener('readystatechange', RequestState);
             window.console.log("maximum amount of Positions added");
         }
     });
-                                                                                // Click Event to Test creation of CV
+                                                                                        // Click Event to Test creation of CV
     document.getElementById('test').addEventListener('click', function(e){
         e.preventDefault();
         window.console.log("test");
-        sendRequest(1, CV)
+        window.console.log(upload);
+        var file = upload.files[0];                                                     // Retrieve photo need to check it here also!!
+        
+        if(file) {
+            sendRequest(1, CV, file);
+        } else {
+            sendRequest(1, CV);
+        }
         //CV = CreateCV();
     });
 
