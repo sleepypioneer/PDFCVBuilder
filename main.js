@@ -34,11 +34,14 @@
             address:        {houseNo: "11", street: "Weserstraße", city: "Berlin", postcode: "12047"},
             dob:    	   "1985-12-02",
             education:      [
-                                {startDate: "2005-09-01", endDate: "2005-09-01", qualification: "BA Honours Media Production", institute: "Northumbria Univeristy", grade: "First"}, 
-                                {startDate: "2004-09-01", endDate: "2004-09-01", qualification: "Art Foundation", institute: "Leeds Art College", grade: "Pass with Merit"}
+                                {startDate: "2005-09", endDate: "2005-09", qualification: "BA Honours Media Production", institute: "Northumbria Univeristy", grade: "First"}, 
+                                {startDate: "2004-09", endDate: "2004-09", qualification: "Art Foundation", institute: "Leeds Art College", grade: "Pass"},
+                                {startDate: "2004-09", endDate: "2004-09", qualification: "Art Foundation", institute: "Leeds Art College", grade: "Pass"},
+                                {startDate: "2004-09", endDate: "2004-09", qualification: "Art Foundation", institute: "Leeds Art College", grade: "Pass"},
+                                {startDate: "2004-09", endDate: "2004-09", qualification: "Art Foundation", institute: "Leeds Art College", grade: "Pass"}
                             ],
             email:          "onlinegurl@gmail.com",
-            firstname:      "Jessica Jessica Jessica",
+            firstname:      "Jessica",
             languages:      [
                                 {Language: "German", skillLevel: "conversational"},
                                 {Language: "English", skillLevel: "native"}
@@ -47,23 +50,27 @@
             liscence:       {type: "B", issuer: "UK"},
             nationality:    "Birtish",
             professionExp:  [
-                                {startDate: "2012-09-01", endDate: "0007-05-01", company: "THE BARN GmbH", position: "Head Roaster & Production Managaer"},
-                                {startDate: "2006-04-01", endDate: "2011-10-01", company: "Freelance (Self Employed)", position: "Camera Assistant"}
-                            ],
+                                {startDate: "2012-09", endDate: "0007-05", company: "THE BARN GmbH", position: "Head Roaster & Production Managaer"},
+                                {startDate: "2006-04", endDate: "2011-10", company: "Freelance (Self Employed)", position: "Camera Assistant"},
+                                {startDate: "2006-04", endDate: "2011-10", company: "Freelance (Self Employed)", position: "Camera Assistant"},
+                                {startDate: "2006-04", endDate: "2011-10", company: "Freelance (Self Employed)", position: "Camera Assistant"},
+                                {startDate: "2006-04", endDate: "2011-10", company: "Freelance (Self Employed)", position: "Camera Assistant"},
+                                {startDate: "2006-04", endDate: "2011-10", company: "Freelance (Self Employed)", position: "Camera Assistant"}
+                                            ],
             programmes:     [
                                 {programme: "PHP", skillLevel: "intermediate"},
                                 {programme: "JavaScript", skillLevel: "intermediate"},
                                 {programme: "Python", skillLevel: "beginner"},
                                 {programme: "", skillLevel: "beginner"}
                             ],
-            summary:        "",
+            summary:        "I am a hard working, reliable individual who has had the opportunity to gain many skills through exciting and varying jobs, volunteer work and hobbies. I welcome any new challenge or experience.",
             tel:            "+4917639956647",
         },
                                                                                 //Create and Add Professional Exp Class
         AddprofessionalExp = function() {
             var ID = professionalExpField.childElementCount + 1,                // Id of skill
                                                                                 // HTML Content for sector
-                html = '<!-- Date --> <label >Start Date:</label> <input type="date" > <label >End Date:</label> <input type="date" > <!-- Company --> <label>Company:</label> <input type="text" autocomplete="organization"> <!-- Position --> <label>Position:</label> <input type="text" autocomplete="position" >',
+                html = '<!-- Date --> <label >Start Date:</label> <input type="month" > <label >End Date:</label> <input type="month" > <!-- Company --> <label>Company:</label> <input type="text" autocomplete="organization"> <!-- Position --> <label>Position:</label> <input type="text" autocomplete="position" >',
                 deleteBtn;
             
             // Create new Entry Field to be appended to section with above HTML
@@ -105,7 +112,7 @@
         AddQualitifcation = function() {
             var ID = educationField.childElementCount + 1,                      // Id of skill
                                                                                 // HTML Content for sector
-                html = '<!-- Date --> <label >Start Date:</label> <input type="date"> <label for="enddate">End Date:</label> <input type="date"> <!-- Qualification --> <label>Qualification:</label> <input type="text" > <!-- Institute --> <label >Educational Institute:</label> <input type="text" > <!-- Grade --> <label >Company:</label> <input type="text" >',
+                html = '<!-- Date --> <label >Start Date:</label> <input type="month"> <label for="enddate">End Date:</label> <input type="month"> <!-- Qualification --> <label>Qualification:</label> <input type="text" > <!-- Institute --> <label >Educational Institute:</label> <input type="text" > <!-- Grade --> <label >Company:</label> <input type="text" >',
                 deleteBtn;
             
             // Create new Entry Field to be appended to section with above HTML
@@ -398,6 +405,9 @@ req.addEventListener('readystatechange', RequestState);
         e.preventDefault();
         window.console.log("test");
         window.console.log(upload);
+        if(surname.value != ""){
+            CV = CreateCV();
+        }
         var file = upload.files[0];                                                     // Retrieve photo need to check it here also!!
         
         if(file) {
@@ -405,7 +415,6 @@ req.addEventListener('readystatechange', RequestState);
         } else {
             sendRequest(1, CV);
         }
-        //CV = CreateCV();
     });
 
 //});
