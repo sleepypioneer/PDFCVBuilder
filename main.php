@@ -10,73 +10,104 @@ require("fpdf/fpdf.php");
 
 class PDF extends FPDF
 {
-    
-function setFooterDetails($footerDetails)
-{
-    $this->footerDetails = $footerDetails;
-}
-
-function Footer()
-{
-    // Go to 1.5 cm from bottom
-    $this->SetY(-15);
-    // Select Arial italic 8
-    $this->SetFont('Arial','I',8);
-    // Print centered short details
-    $this->Cell(0,10, $this->footerDetails." | Page ".$this->PageNo(),0,0,'C');
-}
-
-    
-// Better table
-function ImprovedTable($header, $data)
-{
-    // Column widths
-    $w = array(15, 15, 25, 25, 15);
-    // Header
-    for($i=0;$i<count($header);$i++)
-        $this->Cell($w[$i],7,$header[$i],1,0,'C');
-    $this->Ln();
-    // Data
-    foreach($data as $row)
+    function setFooterDetails($footerDetails)                                         // Inject footer details to $pdf Object
     {
-        $this->Cell($w[0],10,$row['startDate'],'LR');
-        $this->Cell($w[1],10,$row['endDate'],'LR');
-        $this->Cell($w[2],10,$row['qualification'],'LR',0,'R');
-        $this->Cell($w[3],10,$row['institute'],'LR',0,'R');
-        $this->Cell($w[4],10,$row['grade'],'LR',0,'R');
-        $this->Ln();
+        $this->footerDetails = $footerDetails;
     }
-    // Closing line
-    $this->Cell(array_sum($w),0,'','T');
-}
 
-function vcell($c_width,$c_height,$x_axis,$text)
-{
-    $w_w=$c_height/3;
-    $w_w_1=$w_w+2;
-    $w_w1=$w_w+$w_w+$w_w+3;
-    $len=strlen($text);                                                                // check the length of the cell and splits the text into 12 character each and saves in a array 
-    if($len>12){
-        $w_text=str_split($text,12);
-        $this->SetX($x_axis);
-        $this->Cell($c_width,$w_w_1,$w_text[0],'','','');
-        $this->SetX($x_axis);
-        $this->Cell($c_width,$w_w1,$w_text[1],'','','');
-        $this->SetX($x_axis);
-        $this->Cell($c_width,$c_height,'','LTRB',0,'L',0);
+    function Footer()                                                                  // Footer with inserted values
+    {
+        // Go to 1.5 cm from bottom
+        $this->SetY(-15);
+        // Select Arial italic 8
+        $this->SetFont('Arial','I',8);
+        // Print centered short details
+        $this->Cell(0,10, $this->footerDetails." | Page ".$this->PageNo(),0,0,'C');
     }
-    else{
-        $this->SetX($x_axis);
-        $this->Cell($c_width,$c_height,$text,'LTRB',0,'L',0);
+
+    function ImprovedTable($header, $data)                                             // Build table
+    {
+        // Column widths
+        $w = array(15, 15, 25, 25, 15);
+        // Header
+        for($i=0;$i<count($header);$i++)
+            $this->Cell($w[$i],7,$header[$i],1,0,'C');
+        $this->Ln();
+        // Data
+        foreach($data as $row)
+        {
+            $this->Cell($w[0],10,$row['startDate'],'LR');
+            $this->Cell($w[1],10,$row['endDate'],'LR');
+            $this->Cell($w[2],10,$row['qualification'],'LR',0,'R');
+            $this->Cell($w[3],10,$row['institute'],'LR',0,'R');
+            $this->Cell($w[4],10,$row['grade'],'LR',0,'R');
+            $this->Ln();
+        }
+        // Closing line
+        $this->Cell(array_sum($w),0,'','T');
+    }
+
+    function vcell($c_width,$c_height,$x_axis,$text)                                   // Make word wrap cells
+    {
+        $w_w=$c_height/3;
+        $w_w_1=$w_w+2;
+        $w_w1=$w_w+$w_w+$w_w+3;
+        $len=strlen($text);                                                                // check the length of the cell and splits the text into 12 character each and saves in a array 
+        if($len>12){
+            $w_text=str_split($text,12);
+            $this->SetX($x_axis);
+            $this->Cell($c_width,$w_w_1,$w_text[0],'','','');
+            $this->SetX($x_axis);
+            $this->Cell($c_width,$w_w1,$w_text[1],'','','');
+            $this->SetX($x_axis);
+            $this->Cell($c_width,$c_height,'','LTRB',0,'L',0);
+        }
+        else{
+            $this->SetX($x_axis);
+            $this->Cell($c_width,$c_height,$text,'LTRB',0,'L',0);
+        }
     }
 }
+                                                                                        
+function checkInputValidty($input, $type) {
+    $regexDate = '/^[0-9-.]+$/';
+    $regexPhone = '/^[\+]?[(]?[0-9]{3}[)]?[\-\s\.]?[0-9]{3}[\-\s\.]?[0-9]{4,6}$/';
+    $regexEmail = '/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/';
+    $regexText = '/^[a-zA-ZäÄöÖüÜß\-\_\:\"\!\(\)\'\.\s]+$/';
+    $regexCode = '/^[a-zA-Z0-9-.]+$/';
+    $output = "";
+    $test;
+    if ($input !== '') {
+        switch($type){
+            case "date":
+                $test = preg_match($regexDate, $input,$matches, PREG_OFFSET_CAPTURE, 0);
+                break;
+            case "phone":
+                $test =  preg_match($regexPhone, $input,$matches, PREG_OFFSET_CAPTURE, 0);
+                break;
+            case "email":
+                $test = preg_match($regexEmail,$input,$matches, PREG_OFFSET_CAPTURE, 0);
+                break;
+            case "text":
+                $test = preg_match($regexText,$input,$matches, PREG_OFFSET_CAPTURE, 0);
+                break;  
+            case "code":
+                $test = preg_match($regexCode,$input,$matches, PREG_OFFSET_CAPTURE, 0);
+                break; 
+        }
+        if(count($matches) > 0) {
+            $output = $matches[0][0];
+        } else {
+            $output = "error";
+        }
+    }
+    return $output;
 }
 
 $pdf = new PDF();
 $width = $pdf->GetPageWidth();
 $pdf->SetAutoPageBreak(true, 2);                                                        // Set auto page breaks
                                                                                         // Checks if data has been sent, if not returns error
-
 if(isset($_POST["data"])) {
     $pdf->SetFont("Helvetica", "B", 32);                                                // Set up Font, size and styling
     $pdf->SetTextColor(0,0,0);                                                          // Set up Text Color
@@ -95,7 +126,7 @@ if(isset($_POST["data"])) {
     if(isset($_FILES["photograph"]['name']))
     {
         
-        print_r($_FILES['photograph']);
+        if($_FILES['photograph']);
         move_uploaded_file($_FILES['photograph']['tmp_name'], "imgs/".$_FILES["photograph"]['name']);   // Upload photo and save it into Imgs folder
     
         $profileImage = "imgs/".$_FILES['photograph']['name'];                          // Set profile image to file uploaded
@@ -108,8 +139,14 @@ if(isset($_POST["data"])) {
     }
     
     $CV = json_decode($_POST["data"], true);                                            // Decode the data sent as JSON
-    $email = $CV['email'];                                                              // Set email value
-    $name = $CV['firstname']." ".$CV['lastname'];                                       // Name Section
+    $firstName = iconv("UTF-8", "CP1250//TRANSLIT", $CV['firstname']);
+    $lastName = iconv("UTF-8", "CP1250//TRANSLIT", $CV['lastname']);
+    
+    $email = checkInputValidty($CV['email'], 'email');                                  // Set email value
+    
+    
+    
+    $name = checkInputValidty($firstName, 'text')." ".checkInputValidty($lastName, 'text');                                       // Name Section
     $pdf->MultiCell(0, 32, $name, 0, 'C', false);
     $pdf->SetFontSize(12);
     $summaryInfoLine1 = "DOB: ".$CV['dob']." | Nationality: ".$CV['nationality'];       // Set Personal details
@@ -141,7 +178,6 @@ if(isset($_POST["data"])) {
     
     foreach($education as $row)
     {
-        print_r($row);
         $x_axis=$pdf->getx();                                                           // Get x location
         $content = $row['startDate'];                                                   // Set content 
         $pdf->vcell($c_width[0],$c_height,$x_axis,$content);                            // Write cell 
@@ -181,7 +217,6 @@ if(isset($_POST["data"])) {
     
     foreach($education as $row)
     {
-        print_r($row);
         $x_axis=$pdf->getx();                                                           // Get x location
         $content = $row['startDate'];                                                   // Set content 
         $pdf->vcell($c_width[0],$c_height,$x_axis,$content);                            // Write cell 
@@ -210,7 +245,6 @@ if(isset($_POST["data"])) {
     $pdf->SetXY(100,$starting_y);
     $pdf->MultiCell($width/ 2, 12, $summaryText, 0, 'C', false);
     
-    
     $end_of_summary = $pdf->gety();                                                     // Get Y point after this section so able to set next section start point with it
 
     /* *********************
@@ -225,7 +259,6 @@ if(isset($_POST["data"])) {
     $programmes = $CV['programmes'];                                                    // Extract Programmes Array
     foreach($programmes as $row)
     {
-        print_r($row);
         $x_axis=120;                                                                    // Get x location
         $content = $row['programme'];                                                   // Set content 
         $pdf->vcell($c_width[0],$c_height,$x_axis,$content);                            // Write cell 
@@ -249,7 +282,6 @@ if(isset($_POST["data"])) {
     $languages = $CV['languages'];                                                    // Extract Programmes Array
     foreach($languages as $row)
     {
-        print_r($row);
         $x_axis=120;                                                                    // Get x location
         $content = $row['Language'];                                                   // Set content 
         $pdf->vcell($c_width[0],$c_height,$x_axis,$content);                            // Write cell 
@@ -269,9 +301,8 @@ if(isset($_POST["data"])) {
     $footerDetails = $name." | ".$email;
     $pdf->setFooterDetails($footerDetails);
 
-
-    $pdf->Output("pdf_test.pdf","F");
-    print_r($education);
+    
+    $pdf->Output("pdf_test.pdf","F");                                               // Creat output pdf and save it
 } else {
     echo "ERROR!";
 }
