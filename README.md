@@ -17,6 +17,7 @@ Futher development would see options saved locally, and perhaps online in a DB w
 - [ ] JavaScript checks on Imputs to alert user to any incorrect values given
 - [ ] PHP checks of Data & File before making the PDF
 - [ ] Check longer inputs and contraints
+- [ ] Change longer names to Initials
 - [ ] Make Pdf Prettier
 
 ### Further Development
