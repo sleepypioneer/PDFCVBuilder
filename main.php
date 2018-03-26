@@ -98,7 +98,7 @@ function checkInputValidty($input, $type) {
         if(count($matches) > 0) {
             $output = $matches[0][0];
         } else {
-            $output = "error";
+            $output = "Insertion error";
         }
     }
     return $output;
