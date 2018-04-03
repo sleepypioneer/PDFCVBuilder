@@ -71,7 +71,7 @@
         AddprofessionalExp = function() {
             var ID = professionalExpField.childElementCount + 1,                // Id of skill
                                                                                 // HTML Content for sector
-                html = '<!-- Date --> <label >Start Date:</label> <input type="month" > <label >End Date:</label> <input type="month" > <!-- Company --> <label>Company:</label> <input type="text" autocomplete="organization"> <!-- Position --> <label>Position:</label> <input type="text" autocomplete="position" ><span class="removeSection"> &times;</span>',
+                html = '<!-- Date --><hr><span class="removeSection"> &times;</span> <div class="row"><div class="col-25"><label >Start Date:</label></div> <div class="col-75"><input type="month" ></div></div> <div class="row"><div class="col-25"><label >End Date:</label></div> <div class="col-75"> <input type="month" ></div></div><!-- Company --> <div class="row"><div class="col-25"><label>Company:</label></div> <div class="col-75"><input type="text" autocomplete="organization"></div></div> <!-- Position --> <div class="row"><div class="col-25"><label>Position:</label></div> <div class="col-75"> <input type="text" autocomplete="position" ></div></div></div>',
                 deleteBtn;
             
                                                                                 // Create new Entry Field to be appended to section with above HTML
@@ -117,7 +117,7 @@
         AddQualitifcation = function() {
             var ID = educationField.childElementCount + 1,                      // Id of skill
                                                                                 // HTML Content for sector
-                html = '<!-- Date --> <label >Start Date:</label> <input type="month"> <label for="enddate">End Date:</label> <input type="month"> <!-- Qualification --> <label>Qualification:</label> <input type="text" > <!-- Institute --> <label >Educational Institute:</label> <input type="text" > <!-- Grade --> <label >Company:</label> <input type="text" ><span class="removeSection"> &times;</span>';
+                html = '<!-- Date --> <hr><span class="removeSection"> &times;</span><div class="row"> <div class="col-25"> <label >Start Date:</label></div> <div class="col-75"> <input type="month"></div></div> <div class="row"> <div class="col-25"> <label for="enddate">End Date:</label> </div> <div class="col-75"><input type="month"></div></div> <!-- Qualification --> <div class="row"> <div class="col-25"> <label>Qualification:</label></div> <div class="col-75"> <input type="text" ></div></div> <div class="row"> <!-- Institute --> <div class="col-25"> <label >Educational Institute:</label></div> <div class="col-75"> <div class="col-50"> <input type="text" ></div> <!-- Grade --> <div class="grade col-25"><label >Grade:</label></div> <div class="col-25"> <input type="text" ></div>';
             
                                                                                 // Create new Entry Field to be appended to section with above HTML
             function createNewField(ID) {
@@ -274,7 +274,7 @@
                         output = input.value;
                         input.removeAttribute('style');  
                     } else {
-                        input.style.borderColor = '#F00';
+                        input.style.borderColor = '#C4372C';
                         errors += 1;
                     }
                 }
@@ -450,7 +450,7 @@
         }
     });
                                                                                 // Click Event to Test creation of CV
-    document.getElementById('test').addEventListener('click', function(e){
+    document.getElementById('submit').addEventListener('click', function(e){
         e.preventDefault();
         CV = CreateCV();
         var file = upload.files[0];                                                 // Retrieve photo need to check it here also!!
