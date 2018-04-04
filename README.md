@@ -13,9 +13,9 @@ Futher development would see options saved locally, and perhaps online in a DB w
 - [x] Generated PDF saved
 
 ### Still to do:
-- [ ] CSS - to make the form more presentable, Responsive & user friendly
-- [ ] JavaScript checks on Imputs to alert user to any incorrect values given
-- [ ] PHP checks of Data & File before making the PDF
+- [x] CSS - to make the form more presentable, Responsive & user friendly
+- [x] JavaScript checks on Imputs to alert user to any incorrect values given
+- [x] PHP checks of Data & File before making the PDF
 - [ ] Check longer inputs and contraints
 - [ ] Change longer names to Initials
 - [ ] Make Pdf Prettier
