@@ -2,9 +2,11 @@
     
     'use strict';
 
-    var php = 'main.php',                                                       // Path to PHP file
+    let php = 'main.php',                                                       // Path to PHP file
         req = new XMLHttpRequest(),                                             // New AJAX request Object
         formData = new FormData(),                                              // Form Data for AJAX request
+        loading = false,                                                        // Decides whether loading bar is shown (false = hidden)
+        loadingBar = document.getElementById('loader'),                         // Load bar element
         upload = document.querySelector('input[type="file"]'),
         firstnames = document.getElementsByName('firstnames'),                  // HTML element for firstname Field
         surname = document.getElementsByName('lastname')[0],                    // HTML element for lasttname Field
@@ -168,7 +170,7 @@
         AddLanguage = function() {
             var ID = languagesField.childElementCount + 1,                      // Id of skill
                                                                                 // HTML Content for sector
-                html = ' <label>Language:</label> <input type="text"> <!-- Skill Level --> <label>Type of Liscence:</label> <select> <option value="beginner">Beginner</option> <option value="conversational">Conversational</option> <option value="business">Business</option> <option value="fluent">Fluent</option> <option value="native">Native</option> </select><span class="removeSection"> &times;</span>',
+                html = '<hr><span class="removeSection"> ×</span> <div class="row"><div class="col-25"><label for="language_l2">Language:</label> </div><div class="col-75"><div class="col-50"><input type="text" name="language_l2"></div><div class="col-50"> <!-- Skill Level --> <label for="languageSkillLevel_l2">Skill Level:</label> <select name="languageSkillLevel_l2"> <option value="beginner">Beginner</option> <option value="conversational">Conversational</option> <option value="business">Business</option> <option value="fluent">Fluent</option> <option value="native">Native</option> </select></div></div></div>',
                 deleteBtn;
             
                                                                                 // Create new Entry Field to be appended to section with above HTML
@@ -205,13 +207,13 @@
         AddProgramme = function() {
             var ID = programmesField.childElementCount + 1,                     // Id of skill
                                                                                 // HTML Content for sector
-                html = '<label>Computer programme 1:</label> <input type="text"> <!-- Skill Level --> <label>Skill Level:</label> <select> <option value="beginner">Beginner</option> <option value="intermediate">Intermediate</option> <option value="advanced">Advanced</option> </select> <span class="removeSection"> &times;</span>',
+                html = '<hr><span class="removeSection"> &times;</span><div class="row"><div class="col-25"><label>Computer programme:</label></div><div class="col-75"><div class="col-50"> <input type="text"> </div><div class="col-50"><!-- Skill Level --> <label>Skill Level:</label> <select> <option value="beginner">Beginner</option> <option value="intermediate">Intermediate</option> <option value="advanced">Advanced</option> </select></div></div></div>',
                 deleteBtn;
             
                                                                                 // Create new Entry Field to be appended to section with above HTML
             function createNewField(ID) {
                 var entry = document.createElement('DIV');
-                    entry.className = 'position';
+                    entry.className = 'programmes';
                     entry.innerHTML = html;
                 
                 var programme = "programme_cp" + ID,
@@ -247,7 +249,7 @@
                 var regexDate = /^[0-9-.]+$/,
                     regexPhone = /^[\+]?[(]?[0-9]{3}[)]?[\-\s\.]?[0-9]{3}[\-\s\.]?[0-9]{4,6}$/,
                     regexEmail = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/,
-                    regexText = /^[a-zA-ZäÄöÖüÜß\-\_\:\"\!\(\)\'\.\s]+$/,
+                    regexText = /^[a-zA-ZäÄöÖüÜß\-\_\:\,\"\!\(\)\'\.\s]+$/,
                     regexCode = /^[a-zA-Z0-9-.]+$/,
                     output = "",
                     test;
@@ -408,9 +410,39 @@
     function RequestState(evt) {
                                                                                 //  If request is finished and response given (readystate = 4) and uploaded (status = 200)
         if (evt.target.readyState === 4 && evt.target.status === 200) {
-            window.console.log(this.responseText);
+            messagesModal.getElementsByTagName('div')['requestResponse'].innerHTML = this.responseText;
         }
      }
+
+    function displayCVToSend() {
+        var html = '<div id="pdfPreview"><h2>Preview of your CV</h2><p>Click continue to send this version via email or click cancel to return</p><object width="400" height="600" type="application/pdf" data="pdf_cv.pdf#zoom=40" id="pdf_content" alt="Preview of your CV"><p>System Error - This PDF cannot be displayed, please contact IT.</p></object><span class="buttonContainers"><button id="cancel"> Cancel</button><button id="continue">Continue</button></span></div><div id="sendViaEmail" class="hide"><h2>Please enter your email and we will send you the PDF version of your CV</h2><input type="text" id="emailAdd" name="email" placeholder="Your Email.."><button id="sendEmail"></button></div><div id="requestResponse"></div>';
+        
+        messagesModal.setAttribute('class','display');
+        
+        setTimeout(function(){
+            loading = false;                                                        // Set loading to false to hide loading bar again
+            loadingBar.setAttribute('class', 'hide');
+            messagesModal.innerHTML = html;
+            messagesModal.getElementsByTagName('button')['cancel'].addEventListener('click', function(){
+                //messagesModal.innerHTML="";
+                messagesModal.setAttribute('class', 'hide');
+
+            });
+
+            messagesModal.getElementsByTagName('button')['continue'].addEventListener('click', function(){
+                var emailInput = messagesModal.getElementsByTagName('input')['email'];
+                messagesModal.getElementsByTagName('div')['pdfPreview'].setAttribute('class', 'hide');
+                messagesModal.getElementsByTagName('div')['sendViaEmail'].setAttribute('class', 'display');
+                messagesModal.getElementsByTagName('button')['sendEmail'].addEventListener('click', function(e){
+                    e.preventDefault();
+                    sendRequest(2, emailInput.value);
+                    messagesModal.getElementsByTagName('div')['sendViaEmail'].setAttribute('class', 'hide');
+                });
+
+            });
+        }, 5000);
+        
+    }
 
     req.addEventListener('readystatechange', RequestState);                     // Ready State Change Event to collect response if sent
 
@@ -451,9 +483,11 @@
     });
                                                                                 // Click Event to Test creation of CV
     document.getElementById('submit').addEventListener('click', function(e){
+        loading = true;                                                        // Set loading to true to display loading bar
+        loadingBar.setAttribute('class', 'display');
         e.preventDefault();
         CV = CreateCV();
-        var file = upload.files[0];                                                 // Retrieve photo need to check it here also!!
+        var file = upload.files[0];                                             // Retrieve photo need to check it here also!!
         if(CV != 'error') {
             if(file) {
                 sendRequest(1, CV, file);
@@ -461,6 +495,15 @@
                 sendRequest(1, CV);
             }
         }
+                                                                                // Function to scroll to top once submit is pressed.
+        (function smoothscroll(){
+            var currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
+            if (currentScroll > 0) {
+                 window.requestAnimationFrame(smoothscroll);
+                 window.scrollTo (0,currentScroll - (currentScroll/5));
+            }
+        })();
+        displayCVToSend();
     });
 
 //});

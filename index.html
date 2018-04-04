@@ -176,7 +176,9 @@
                         <input type="file" name="photograph" accept="image/*">
                     </div>
                 </div>
-
+                
+                <hr>
+            
                 <!-- Summary -->
                 <div class="row" id="PersonalitySummary">
                     <div class="col-25">
@@ -188,6 +190,8 @@
                 </div>
             </div><!-- Header -->
 
+            <hr>
+            
             <!-- Professional Experience -->
             <h4>Professional Experience</h4>
             <div id="professionalExp">
@@ -234,6 +238,8 @@
             </div><!-- Professional Experience -->
             <button class="" id="addAnotherPosition">Add another Position</button>
 
+            <hr>
+            
             <!-- Education -->
             <h4>Education</h4>
             <div id="education">
@@ -288,43 +294,65 @@
                 </div>
             </div> <!-- Education -->
             <button class="" id="addAnotherQualification">Add another Qualification</button>
-
+            
+            <hr>
+            
             <!-- Languages -->
             <h4>Language Skills</h4>
             <div id="languages">
                 <!-- Languages -->
                 <div class="languages">
-                    <label for="language_l1">Language:</label>
-                    <input type="text" name="language_l1">
-
-                    <!-- Skill Level -->
-                    <label for="languageSkillLevel_l1">Skill Level:</label>
-                    <select name="languageSkillLevel_l1">
-                        <option value="beginner">Beginner</option>
-                        <option value="conversational">Conversational</option>
-                        <option value="business">Business</option>
-                        <option value="fluent">Fluent</option>
-                        <option value="native">Native</option>
-                    </select>
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="language_l1">Language:</label>
+                        </div>
+                        <div class="col-75">
+                            <div class="col-50">
+                                <input type="text" name="language_l1">
+                            </div>
+                            <div class="col-50">
+                                <!-- Skill Level -->
+                                <label for="languageSkillLevel_l1">Skill Level:</label>
+                                <select name="languageSkillLevel_l1">
+                                    <option value="beginner">Beginner</option>
+                                    <option value="conversational">Conversational</option>
+                                    <option value="business">Business</option>
+                                    <option value="fluent">Fluent</option>
+                                    <option value="native">Native</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>    
             <button class="" id="addLanguage">Add another Language</button>
 
+            <hr>
+            
             <!-- Computer Skills -->
             <h4>Computer Skills</h4>
             <div id="computerSkills"> 
                 <!-- Programmes -->
                 <div class="programmes">
-                    <label for="programme_cp1">Computer programme:</label>
-                    <input type="text" name="programme_cp1">
-
-                    <!-- Skill Level --> 
-                    <label for="programmeSkillLevel_cp1">Skill Level:</label>
-                    <select name="programmeSkillLevel_cp1">
-                        <option value="beginner">Beginner</option>
-                        <option value="intermediate">Intermediate</option>
-                        <option value="advanced">Advanced</option>
-                    </select> 
+                     <div class="row">
+                         <div class="col-25">
+                            <label for="programme_cp1">Computer programme:</label>
+                         </div>
+                         <div class="col-75">
+                            <div class="col-50">   
+                                <input type="text" name="programme_cp1">
+                             </div>
+                             <div class="col-50">   
+                                <!-- Skill Level --> 
+                                <label for="programmeSkillLevel_cp1">Skill Level:</label>
+                                <select name="programmeSkillLevel_cp1">
+                                    <option value="beginner">Beginner</option>
+                                    <option value="intermediate">Intermediate</option>
+                                    <option value="advanced">Advanced</option>
+                                </select> 
+                             </div>
+                         </div>
+                    </div>
                 </div>
             </div> 
             <button class="" id="addProgramme">Add another Programme</button>
@@ -339,7 +367,16 @@
             </div>
         </form>
     </div>
-    <div id="messagesModal"></div>
+    <div id="messagesModal" class="hide">
+        <div id="requestResponse"></div>
+    </div>
+    <div id="loader" class="hide">
+        <h2>The Elves are building your CV...</h2>
+        <img src="elfisbuildingyourcv.jpg" height="200" width="400"/>
+        <svg viewBox="0 0 32 32" width="46" height="46">
+            <circle id="ud811Spinner" cx="16" cy="16" r="14" fill="none"></circle>
+        </svg>
+    </div>
     <script type="text/javascript" src="main.js"></script>
 </body>
 </html>

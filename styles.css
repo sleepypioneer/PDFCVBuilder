@@ -1,3 +1,10 @@
+/*************************************
+    Style Sheet for PDF CV BUILDER
+**************************************/
+
+/*************************
+    General Styles
+**************************/
 * {
     box-sizing: border-box;
 }
@@ -10,9 +17,33 @@ body {
 
 hr {
     border-color: #1C3766;
+    margin: 2rem 1.5rem;
+}
+
+
+
+.languages hr, .programmes hr {
+    border-color: #dbce95;
     margin: 1rem 4rem;
 }
 
+/*************************
+    Hide & Display Styles
+**************************/
+
+.hide {
+    opacity: 0;
+    z-index: -1;
+}
+
+.display {
+    opacity: 1;
+    z-index: 1;
+}
+
+/*************************    
+    Text Styles
+**************************/
 h1, h2, h3, h4 {
     font-family: 'Francois One', sans-serif;
 }
@@ -29,11 +60,17 @@ span.removeSection {
     left: 98%;
 }
 
+/*************************
+    Image Styles
+**************************/
 #front_page_picture {
     width: 100%;
     height: auto;
 }
 
+/*************************
+    Input Styles
+**************************/
 input {
     color: #1C3766;
     width: 100%;
@@ -62,54 +99,6 @@ input[type="file"] {
     padding: 8px 0px;
 }
 
-.header {
-    max-width: 780px;
-    margin: auto;
-}
-
-.container {
-    border-radius: 5px;
-    background-color: #f2f2f2;
-    padding: 20px;
-    max-width: 780px;
-    margin: auto;
-}
-
-.positions {
-    margin-bottom: 20px;
-    /* border: solid 2px; */
-}
-
-.languages, .programmes {
-    margin-bottom: 20px;
-    display: flex;
-    padding-right: 20px;
-}
-
-.languages input, .programmes input {
-    margin-right: 20px;
-}
-
-label {
-    padding: 12px 12px 12px 0;
-    display: inline-block;
-    color: #1C3766;
-}
-
-button {
-    color: #1C3766;
-}
-
-
-select {
-    width: auto;
-    padding: 16px 0px;
-    border: none;
-    border-radius: 4px;
-    background-color: #f1f1f1;
-    color: #1C3766;
-}
-
 input[type=submit],input[type=reset] {
     background-color: #219D92;
     color: white;
@@ -125,6 +114,38 @@ input[type=submit]:hover,  input[type=reset]:hover{
     background-color: #30B8AE;
 }
 
+label {
+    padding: 12px 12px 12px 0;
+    display: inline-block;
+    color: #1C3766;
+}
+
+/*************************
+    Button Styles
+**************************/
+button {
+    color: #1C3766;
+}
+
+button:focus {
+    outline: none;
+}
+
+/*************************
+    Select Styles
+**************************/
+select {
+    width: auto;
+    padding: 16px 0px;
+    border: none;
+    border-radius: 4px;
+    background-color: #f1f1f1;
+    color: #1C3766;
+}
+
+/*************************
+    Layout Styles
+**************************/
 .col-25 {
     float: left;
     width: 25%;
@@ -154,11 +175,227 @@ input[type=submit]:hover,  input[type=reset]:hover{
     clear: both;
 }
 
+/*************************
+    Container Styles
+**************************/
+.container {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    max-width: 780px;
+    margin: auto;
+}
+
+.header {
+    max-width: 780px;
+    margin: auto;
+}
+
+.positions {
+    margin-bottom: 20px;
+    /* border: solid 2px; */
+}
+
+.languages, .programmes {
+    margin-bottom: 20px;
+    /*display: flex; */
+    /* flex-wrap: wrap; */
+    /*padding-right: 20px; */
+}
+
+.languages input, .programmes input {
+    margin-right: 20px;
+    width: -webkit-fill-available;
+}
+
+/*************************
+    Message Modal Styles
+**************************/
+
+#messagesModal {
+    width: 100%;
+    height: 100%;
+    background-color: #000000d9;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: opacity ease 3s;
+}
+
+#messagesModal div {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 2vh;
+    color: white;
+    position: absolute;
+    top: 0;
+    transition: opacity ease 1s;
+}
+
+#messagesModal div h2{
+    margin-bottom: 0;
+    max-width: 400px;
+    text-align: center;
+}
+
+#messagesModal div p {
+    max-width: 400px;
+    text-align: center;
+}
+
+.buttonContainers {
+    width: 400px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 4px;
+}
+
+#messagesModal div button {
+    margin: 4px;
+    background-color: #219D92;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 5%;
+    width: fit-content;
+}
+
+#messagesModal div button:hover {
+    background-color: #30B8AE;
+}
+
+#sendViaEmail {
+    margin-top: 20%;
+}
+
+#emailAdd {
+    width: 400px;
+    margin: 20px 0px;
+}
+
+
+div#requestResponse {
+    z-index: -1;
+    padding: 20vh 10vw;
+    text-align: center;
+    margin: auto;
+    color: white;
+}
+/*************************
+    Loader Styles
+**************************/
+#loader {
+    left: 50%;
+    top: 50%;
+    position: fixed;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#loader h2 {
+    color: white;
+    text-align: center;
+}
+
+#loader #ud811Spinner {
+    box-sizing: border-box;
+    stroke: #30b8ae;
+    stroke-width: 3px;
+    -webkit-transform-origin: 50%;
+    transform-origin: 50%;
+    -webkit-animation: line 1.6s cubic-bezier(0.4, 0, 0.2, 1) infinite, rotate 1.6s linear infinite;
+    animation: line 1.6s cubic-bezier(0.4, 0, 0.2, 1) infinite, rotate 1.6s linear infinite;
+}
+
+svg {
+    margin: auto;
+    margin-top: 20px;
+}
+
+@-webkit-keyframes rotate {
+    from {
+        -webkit-transform: rotate(0);
+        transform: rotate(0);
+    }
+    to {
+        -webkit-transform: rotate(450deg);
+        transform: rotate(450deg);
+    }
+}
+
+@keyframes rotate {
+    from {
+        -webkit-transform: rotate(0);
+        transform: rotate(0);
+    }
+    to {
+        -webkit-transform: rotate(450deg);
+        transform: rotate(450deg);
+    }
+}
+
+@-webkit-keyframes line {
+    0% {
+        stroke-dasharray: 2, 85.964;
+        -webkit-transform: rotate(0);
+        transform: rotate(0);
+    }
+    50% {
+        stroke-dasharray: 65.973, 21.9911;
+        stroke-dashoffset: 0;
+    }
+    100% {
+        stroke-dasharray: 2, 85.964;
+        stroke-dashoffset: -65.973;
+        -webkit-transform: rotate(90deg);
+        transform: rotate(90deg);
+    }
+}
+
+@keyframes line {
+    0% {
+        stroke-dasharray: 2, 85.964;
+        -webkit-transform: rotate(0);
+        transform: rotate(0);
+    }
+    50% {
+        stroke-dasharray: 65.973, 21.9911;
+        stroke-dashoffset: 0;
+    }
+    100% {
+        stroke-dasharray: 2, 85.964;
+        stroke-dashoffset: -65.973;
+        -webkit-transform: rotate(90deg);
+        transform: rotate(90deg);
+    }
+}
+
+/*************************
+    Media Queries Styles
+**************************/
 /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
 
 @media screen and (max-width: 600px) {
-    .col-25, .col-75, input[type=submit] {
+    .col-25, .col-50, .col-75{
         width: 100%;
         margin-top: 0;
     }
+    
+    #sendViaEmail {
+        margin-top: 30%;
+    }
+    
+    .languages, .programmes {
+        flex-wrap: wrap;
+    }
+    
 }
