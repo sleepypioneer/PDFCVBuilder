@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html><html><head><meta charset="utf-8">
+<script type="text/javascript">
+function anfordern(personalnummer, umfang)
+{
+   var req = new XMLHttpRequest();
+   req.open("get", "ajax_parameter.php?pnr=" + personalnummer
+      + "&umfang=" + umfang, true);
+   req.setRequestHeader("Content-Type",
+      "application/x-www-form-urlencoded");
+   req.onreadystatechange = auswerten;
+   req.send();
+}
+
+function auswerten(e)
+{
+   if(e.target.readyState == 4 && e.target.status == 200)
+      document.getElementById("idAbsatz").firstChild.nodeValue
+         = e.target.responseText;
+}
+</script>
+</head>
+
+<body>
+<p>Personalnummer:<br>
+<a href="javascript:anfordern(6714, 'alle');">6714</a><br>
+<a href="javascript:anfordern(81343, 'teil');">81343</a></p>
+<p id="idAbsatz">&nbsp;</p>
+</body></html>

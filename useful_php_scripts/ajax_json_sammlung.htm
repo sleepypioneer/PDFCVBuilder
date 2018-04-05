@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html><html><head><meta charset="utf-8">
+<script type="text/javascript">
+function anfordern(x)
+{
+   req = new XMLHttpRequest();
+   req.open("get", "ajax_json_sammlung.txt", true);
+   req.onreadystatechange = function(e) { auswerten(e, x); };
+   req.send();
+}
+
+function auswerten(e, x)
+{
+   if(e.target.readyState == 4 && e.target.status == 200)
+   {
+      var antwort;
+      if(window.JSON)
+         antwort = JSON.parse(e.target.responseText);
+      else
+         antwort = eval("(" + e.target.responseText + ")");
+      document.getElementById("idAusgabe").firstChild.nodeValue
+         = "Farbe: " + antwort[x].farbe
+         + ", Geschwindigkeit: " + antwort[x].geschwindigkeit;
+   }
+}
+</script>
+</head>
+
+<body>
+<p>Fahrzeugdaten:<br>
+<a href="javascript:anfordern(0);">Dacia</a><br>
+<a href="javascript:anfordern(1);">Nissan</a><br>
+<a href="javascript:anfordern(2);">Renault</a></p>
+<p id="idAusgabe">&nbsp;</p>
+</body></html>

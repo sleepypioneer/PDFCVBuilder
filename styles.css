@@ -17,9 +17,8 @@ body {
 
 hr {
     border-color: #1C3766;
-    margin: 2rem 1.5rem;
+    margin: 2rem 0;
 }
-
 
 
 .languages hr, .programmes hr {
@@ -90,8 +89,20 @@ input[type="date"], input[type="month"] {
     width: fit-content;
 }
 
-input[type="textarea"] {
+textarea {
     height: 8rem; 
+    color: #1C3766;
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    outline: none;
+    border: 3px solid #ccc;
+    transition: 0.5s;
+    resize: vertical;
+}
+
+textarea:focus {
+    border: 3px solid #555;
 }
 
 input[type="file"] {
@@ -219,7 +230,7 @@ select {
     position: absolute;
     top: 0;
     left: 0;
-    transition: opacity ease 3s;
+    transition: opacity ease 2s;
 }
 
 #messagesModal div {
@@ -286,6 +297,15 @@ div#requestResponse {
     text-align: center;
     margin: auto;
     color: white;
+}
+
+span.large {
+    color: white;
+    font-size: -webkit-xxx-large;
+    position: absolute;
+    top: 10vh;
+    left: 80%;
+    z-index: 1;
 }
 /*************************
     Loader Styles

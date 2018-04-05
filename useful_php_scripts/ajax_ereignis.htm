@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html><html><head><meta charset="utf-8">
+<script type="text/javascript">
+function ev(p)
+{
+   switch(p)
+   {
+      case 1: alert("Maus in 1. Zelle hineinbewegt");       break;
+      case 2: alert("Maus aus 2. Zelle herausbewegt");      break;
+      case 3: alert("Maustaste in 3. Zelle gedrückt");       break;
+      case 4: alert("Maustaste in 4. Zelle losgelassen");    break;
+      case 5: alert("Formular gesendet");                    break;
+      case 6: alert("Formular zurückgesetzt");               break;
+      case 7: alert("Auswahl: "+document.f.s.selectedIndex); break;
+   }
+}
+</script>
+</head>
+
+<body>
+<table border="1">
+   <tr>
+      <td onmouseover="ev(1)">Erste Zelle</td>
+      <td onmouseout="ev(2)">Zweite Zelle</td>
+      <td onmousedown="ev(3)">Dritte Zelle</td>
+      <td onmouseup="ev(4)">Vierte Zelle</td>
+   </tr>
+</table><br>
+
+<form name="f" onsubmit="ev(5)" onreset="ev(6)">
+   <select name="s" onchange="ev(7)">
+      <option value="0" selected="selected">0</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+   </select>
+   <input type="submit"><input type="reset">
+</form>
+</body></html>

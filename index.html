@@ -31,9 +31,9 @@
                         <label for="firstname">First Name/s:</label>
                     </div>
                     <div class="col-75">
-                        <input type="text" name="firstnames" autocomplete='given-name'  required>
-                        <input type="text" name="firstnames" autocomplete='given-name'  required>
-                        <input type="text" name="firstnames" autocomplete='given-name'  required>
+                        <input type="text" name="firstnames" autocomplete='given-name' maxlength="16"  required>
+                        <input type="text" name="firstnames" autocomplete='given-name' maxlength="16" required>
+                        <input type="text" name="firstnames" autocomplete='given-name' maxlength="16" required>
                     </div>
                 </div>    
 
@@ -43,7 +43,7 @@
                         <label for="lastname">Last Name:</label>
                     </div>
                     <div class="col-75">
-                        <input type="text" name="lastname" autocomplete='family-name'  required>
+                        <input type="text" name="lastname" autocomplete='family-name' maxlength="16" required>
                     </div>
                 </div>
 
@@ -78,7 +78,7 @@
                         <label for="telephone">Telephone No:</label>
                     </div>
                     <div class="col-75">
-                        <input type="tel" name="telephone" autocomplete='tel-national'>
+                        <input type="tel" name="telephone" autocomplete='tel-national' maxlength="15">
                     </div>
                 </div>
 
@@ -89,7 +89,7 @@
                             <label for="houseNo">House Number:</label>
                         </div>
                         <div class="col-75">
-                            <input type="text" name="houseNo">
+                            <input type="text" name="houseNo" maxlength="5">
                         </div>
                     </div>
 
@@ -98,7 +98,7 @@
                              <label for="street">Street Name:</label>
                         </div>
                         <div class="col-75">
-                            <input type="text" name="street" autocomplete='address-line1'>
+                            <input type="text" name="street" autocomplete='address-line1' maxlength="24">
                         </div>
                     </div>
 
@@ -107,7 +107,7 @@
                              <label for="city">City:</label>
                         </div>
                         <div class="col-75">
-                            <input type="text" name="city" autocomplete='address-level2'>
+                            <input type="text" name="city" autocomplete='address-level2' maxlength="18">
                         </div>
                     </div>
 
@@ -116,7 +116,7 @@
                              <label for="postcode">Post Code:</label>
                         </div>
                         <div class="col-75">
-                            <input type="text" name="postcode" autocomplete='postal-code'>
+                            <input type="text" name="postcode" autocomplete='postal-code' maxlength="8">
                         </div>
                     </div>
                 </div>
@@ -185,7 +185,7 @@
                         <label for="personalitySummary">Personality Summary</label>
                     </div>
                     <div class="col-75">
-                        <input type="textarea" name="personalitySummary" required>
+                        <textarea name="personalitySummary" maxlength="56" required></textarea>
                     </div>
                 </div>
             </div><!-- Header -->
@@ -221,7 +221,7 @@
                             <label for="company_p1">Company:</label>
                         </div>
                         <div class="col-75">
-                            <input type="text" name="company_p1" autocomplete='organization'>
+                            <input type="text" name="company_p1" autocomplete='organization' maxlength="18">
                         </div>
                     </div>
                 
@@ -231,7 +231,7 @@
                             <label for="position_p1">Position:</label>
                         </div>
                         <div class="col-75">
-                            <input type="text" name="position_p1">
+                            <input type="text" name="position_p1" maxlength="18">
                         </div>
                     </div>
                 </div>
@@ -270,7 +270,7 @@
                             <label for="qualification_e1">Qualification:</label>
                         </div>
                         <div class="col-75">
-                            <input type="text" name="qualification_e1">  
+                            <input type="text" name="qualification_e1" maxlength="18">  
                         </div>
                     </div>
                     <div class="row">
@@ -280,14 +280,14 @@
                         </div>
                         <div class="col-75">
                             <div class="col-50">
-                                <input type="text" name="institute_e1">
+                                <input type="text" name="institute_e1" maxlength="18">
                             </div>
                             <!-- Grade -->
                             <div class="grade col-25">
                                 <label for="grade_e1">Grade:</label>
                             </div>
                             <div class="col-25">
-                                <input type="text" name="grade_e1">
+                                <input type="text" name="grade_e1" maxlength="8">
                             </div>
                         </div>
                     </div>
@@ -308,7 +308,7 @@
                         </div>
                         <div class="col-75">
                             <div class="col-50">
-                                <input type="text" name="language_l1">
+                                <input type="text" name="language_l1" maxlength="12">
                             </div>
                             <div class="col-50">
                                 <!-- Skill Level -->
@@ -340,7 +340,7 @@
                          </div>
                          <div class="col-75">
                             <div class="col-50">   
-                                <input type="text" name="programme_cp1">
+                                <input type="text" name="programme_cp1" maxlength="12">
                              </div>
                              <div class="col-50">   
                                 <!-- Skill Level --> 
@@ -368,6 +368,7 @@
         </form>
     </div>
     <div id="messagesModal" class="hide">
+        <span class="large"> &times;</span>
         <div id="requestResponse"></div>
     </div>
     <div id="loader" class="hide">

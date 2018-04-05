@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html><html><head><meta charset="utf-8">
+<script type="text/javascript">
+function anfordern(x)
+{
+   req = new XMLHttpRequest();
+   req.open("get", "ajax_xml_sammlung.xml", true);
+   req.onreadystatechange = function(e) { auswerten(e, x); };
+   req.send();
+}
+
+function auswerten(e, x)
+{
+   if(e.target.readyState == 4 && e.target.status == 200)
+   {
+      var antwort = e.target.responseXML;
+      var kfarbe = antwort.getElementsByTagName("farbe")[x];
+      var kleistung = antwort.getElementsByTagName("leistung")[x];
+      document.getElementById("idDaten").firstChild.nodeValue =
+         "Farbe: " + kfarbe.firstChild.nodeValue
+         + ", Leistung: " + kleistung.firstChild.nodeValue
+         + ", Hubraum: " + kleistung.getAttribute("hubraum")
+         + ", Zylinder: " + kleistung.getAttribute("zylinder");
+   }
+}
+</script>
+</head>
+<body>
+<p>Fahrzeugdaten:<br>
+<a href="javascript:anfordern(0);">Dacia</a><br>
+<a href="javascript:anfordern(1);">Renault</a></p>
+<p id="idDaten">&nbsp;</p>
+</body></html>

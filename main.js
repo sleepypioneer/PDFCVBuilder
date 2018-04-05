@@ -7,6 +7,7 @@
         formData = new FormData(),                                              // Form Data for AJAX request
         loading = false,                                                        // Decides whether loading bar is shown (false = hidden)
         loadingBar = document.getElementById('loader'),                         // Load bar element
+        body = document.getElementsByTagName('body')[0],
         upload = document.querySelector('input[type="file"]'),
         firstnames = document.getElementsByName('firstnames'),                  // HTML element for firstname Field
         surname = document.getElementsByName('lastname')[0],                    // HTML element for lasttname Field
@@ -73,7 +74,7 @@
         AddprofessionalExp = function() {
             var ID = professionalExpField.childElementCount + 1,                // Id of skill
                                                                                 // HTML Content for sector
-                html = '<!-- Date --><hr><span class="removeSection"> &times;</span> <div class="row"><div class="col-25"><label >Start Date:</label></div> <div class="col-75"><input type="month" ></div></div> <div class="row"><div class="col-25"><label >End Date:</label></div> <div class="col-75"> <input type="month" ></div></div><!-- Company --> <div class="row"><div class="col-25"><label>Company:</label></div> <div class="col-75"><input type="text" autocomplete="organization"></div></div> <!-- Position --> <div class="row"><div class="col-25"><label>Position:</label></div> <div class="col-75"> <input type="text" autocomplete="position" ></div></div></div>',
+                html = '<!-- Date --><hr><span class="removeSection"> &times;</span> <div class="row"><div class="col-25"><label >Start Date:</label></div> <div class="col-75"><input type="month" ></div></div> <div class="row"><div class="col-25"><label >End Date:</label></div> <div class="col-75"> <input type="month" ></div></div><!-- Company --> <div class="row"><div class="col-25"><label>Company:</label></div> <div class="col-75"><input type="text" autocomplete="organization" maxlength="18"></div></div> <!-- Position --> <div class="row"><div class="col-25"><label>Position:</label></div> <div class="col-75"> <input type="text" autocomplete="position" maxlength="18"></div></div></div>',
                 deleteBtn;
             
                                                                                 // Create new Entry Field to be appended to section with above HTML
@@ -119,7 +120,7 @@
         AddQualitifcation = function() {
             var ID = educationField.childElementCount + 1,                      // Id of skill
                                                                                 // HTML Content for sector
-                html = '<!-- Date --> <hr><span class="removeSection"> &times;</span><div class="row"> <div class="col-25"> <label >Start Date:</label></div> <div class="col-75"> <input type="month"></div></div> <div class="row"> <div class="col-25"> <label for="enddate">End Date:</label> </div> <div class="col-75"><input type="month"></div></div> <!-- Qualification --> <div class="row"> <div class="col-25"> <label>Qualification:</label></div> <div class="col-75"> <input type="text" ></div></div> <div class="row"> <!-- Institute --> <div class="col-25"> <label >Educational Institute:</label></div> <div class="col-75"> <div class="col-50"> <input type="text" ></div> <!-- Grade --> <div class="grade col-25"><label >Grade:</label></div> <div class="col-25"> <input type="text" ></div>';
+                html = '<!-- Date --> <hr><span class="removeSection"> &times;</span><div class="row"> <div class="col-25"> <label >Start Date:</label></div> <div class="col-75"> <input type="month"></div></div> <div class="row"> <div class="col-25"> <label for="enddate">End Date:</label> </div> <div class="col-75"><input type="month"></div></div> <!-- Qualification --> <div class="row"> <div class="col-25"> <label>Qualification:</label></div> <div class="col-75"> <input type="text" maxlength="18"></div></div> <div class="row"> <!-- Institute --> <div class="col-25"> <label >Educational Institute:</label></div> <div class="col-75"> <div class="col-50"> <input type="text" maxlength="18" ></div> <!-- Grade --> <div class="grade col-25"><label >Grade:</label></div> <div class="col-25"> <input type="text" maxlength="8"></div>';
             
                                                                                 // Create new Entry Field to be appended to section with above HTML
             function createNewField(ID) {
@@ -170,7 +171,7 @@
         AddLanguage = function() {
             var ID = languagesField.childElementCount + 1,                      // Id of skill
                                                                                 // HTML Content for sector
-                html = '<hr><span class="removeSection"> ×</span> <div class="row"><div class="col-25"><label for="language_l2">Language:</label> </div><div class="col-75"><div class="col-50"><input type="text" name="language_l2"></div><div class="col-50"> <!-- Skill Level --> <label for="languageSkillLevel_l2">Skill Level:</label> <select name="languageSkillLevel_l2"> <option value="beginner">Beginner</option> <option value="conversational">Conversational</option> <option value="business">Business</option> <option value="fluent">Fluent</option> <option value="native">Native</option> </select></div></div></div>',
+                html = '<hr><span class="removeSection"> ×</span> <div class="row"><div class="col-25"><label for="language_l2">Language:</label> </div><div class="col-75"><div class="col-50"><input type="text" maxlength="12"></div><div class="col-50"> <!-- Skill Level --> <label>Skill Level:</label> <select > <option value="beginner">Beginner</option> <option value="conversational">Conversational</option> <option value="business">Business</option> <option value="fluent">Fluent</option> <option value="native">Native</option> </select></div></div></div>',
                 deleteBtn;
             
                                                                                 // Create new Entry Field to be appended to section with above HTML
@@ -207,7 +208,7 @@
         AddProgramme = function() {
             var ID = programmesField.childElementCount + 1,                     // Id of skill
                                                                                 // HTML Content for sector
-                html = '<hr><span class="removeSection"> &times;</span><div class="row"><div class="col-25"><label>Computer programme:</label></div><div class="col-75"><div class="col-50"> <input type="text"> </div><div class="col-50"><!-- Skill Level --> <label>Skill Level:</label> <select> <option value="beginner">Beginner</option> <option value="intermediate">Intermediate</option> <option value="advanced">Advanced</option> </select></div></div></div>',
+                html = '<hr><span class="removeSection"> &times;</span><div class="row"><div class="col-25"><label>Computer programme:</label></div><div class="col-75"><div class="col-50"> <input type="text" maxlength="12"> </div><div class="col-50"><!-- Skill Level --> <label>Skill Level:</label> <select> <option value="beginner">Beginner</option> <option value="intermediate">Intermediate</option> <option value="advanced">Advanced</option> </select></div></div></div>',
                 deleteBtn;
             
                                                                                 // Create new Entry Field to be appended to section with above HTML
@@ -284,8 +285,11 @@
             }
             
             function errorMessage(message){
-                messagesModal.innerHTML = errorMessage;
-                messagesModal.setAttribute('class', 'displayMessage');
+                messagesModal.innerHTML += '<div style="color: white; display: flex; height: 100vh; width: 100vw; justify-content: center; "><h2>' + message + '</h2></div>';
+                messagesModal.setAttribute('class', 'display');
+                messagesModal.getElementsByTagName('span')[0].addEventListener('click', function(e){
+                   this.parentNode.setAttribute('class', 'hide');
+                });
             }
         
             function fileCheck(file) {
@@ -296,7 +300,12 @@
                 var i,
                     namestring = "";
                 for (i=0; i < firstnames.length; i++){
-                    namestring += firstnames[i].value + " ";
+                    if(i == 1 || i == 2){
+                        var initial = firstnames[i].value.charAt(0).toUpperCase(); // Change middle names to Initials
+                        namestring += initial + " ";
+                    } else {
+                        namestring += checkInputs(firstnames[i], 'text') + " ";
+                    }
                 }
                 return namestring.trim();                                       // Return namestring with extra white space removed
             } 
@@ -388,7 +397,6 @@
                     return cv;                                                  // Return CV Object
             } else {
                 var message = "Please check your inputed Data and correct fields marked in red";
-                window.console.log(message);
                 errorMessage(message);
                 return 'error';
             }
@@ -411,11 +419,12 @@
                                                                                 //  If request is finished and response given (readystate = 4) and uploaded (status = 200)
         if (evt.target.readyState === 4 && evt.target.status === 200) {
             messagesModal.getElementsByTagName('div')['requestResponse'].innerHTML = this.responseText;
+                                                                                
         }
      }
 
     function displayCVToSend() {
-        var html = '<div id="pdfPreview"><h2>Preview of your CV</h2><p>Click continue to send this version via email or click cancel to return</p><object width="400" height="600" type="application/pdf" data="pdf_cv.pdf#zoom=40" id="pdf_content" alt="Preview of your CV"><p>System Error - This PDF cannot be displayed, please contact IT.</p></object><span class="buttonContainers"><button id="cancel"> Cancel</button><button id="continue">Continue</button></span></div><div id="sendViaEmail" class="hide"><h2>Please enter your email and we will send you the PDF version of your CV</h2><input type="text" id="emailAdd" name="email" placeholder="Your Email.."><button id="sendEmail"></button></div><div id="requestResponse"></div>';
+        var html = '<div id="pdfPreview"><h2>Preview of your CV</h2><p>Click continue to send this version via email or click cancel to return</p><object width="400" height="600" type="application/pdf" data="pdf_cv.pdf#zoom=40" id="pdf_content" alt="Preview of your CV"><p>System Error - This PDF cannot be displayed, please contact IT.</p></object><span class="buttonContainers"><button id="cancel"> Cancel</button><button id="continue">Continue</button></span></div><div id="sendViaEmail" class="hide"><h2>Please enter your email and we will send you the PDF version of your CV</h2><input type="text" id="emailAdd" name="email" placeholder="Your Email.."><button id="sendEmail">Send</button></div><span class="large"> &times;</span><div id="requestResponse"></div>';
         
         messagesModal.setAttribute('class','display');
         
@@ -424,9 +433,13 @@
             loadingBar.setAttribute('class', 'hide');
             messagesModal.innerHTML = html;
             messagesModal.getElementsByTagName('button')['cancel'].addEventListener('click', function(){
-                //messagesModal.innerHTML="";
+                messagesModal.getElementsByTagName('object')[0].setAttribute('class', 'hide');
                 messagesModal.setAttribute('class', 'hide');
 
+            });
+            
+            messagesModal.getElementsByTagName('span')[1].addEventListener('click', function(e){
+               this.parentNode.setAttribute('class', 'hide');
             });
 
             messagesModal.getElementsByTagName('button')['continue'].addEventListener('click', function(){
@@ -483,18 +496,9 @@
     });
                                                                                 // Click Event to Test creation of CV
     document.getElementById('submit').addEventListener('click', function(e){
-        loading = true;                                                        // Set loading to true to display loading bar
-        loadingBar.setAttribute('class', 'display');
         e.preventDefault();
         CV = CreateCV();
         var file = upload.files[0];                                             // Retrieve photo need to check it here also!!
-        if(CV != 'error') {
-            if(file) {
-                sendRequest(1, CV, file);
-            } else {
-                sendRequest(1, CV);
-            }
-        }
                                                                                 // Function to scroll to top once submit is pressed.
         (function smoothscroll(){
             var currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
@@ -503,7 +507,15 @@
                  window.scrollTo (0,currentScroll - (currentScroll/5));
             }
         })();
-        displayCVToSend();
+        if(CV != 'error') {
+            loadingBar.setAttribute('class', 'display');
+            if(file) {
+                sendRequest(1, CV, file);
+            } else {
+                sendRequest(1, CV);
+            }
+            displayCVToSend();
+        }
     });
 
 //});
