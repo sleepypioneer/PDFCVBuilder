@@ -16,8 +16,8 @@ Futher development would see options saved locally, and perhaps online in a DB w
 - [x] CSS - to make the form more presentable, Responsive & user friendly
 - [x] JavaScript checks on Imputs to alert user to any incorrect values given
 - [x] PHP checks of Data & File before making the PDF
-- [ ] Check longer inputs and contraints
-- [ ] Change longer names to Initials
+- [ ] Check longer inputs and contraints (JS side done, need to complete PHP checks)
+- [x] Change longer names to Initials - all middle names go to initials
 - [ ] Make Pdf Prettier
 - [ ] Look at TCPDF to see if this will help for layout https://tcpdf.org/
 
