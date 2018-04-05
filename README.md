@@ -1,6 +1,6 @@
 # PDF CV Builder
 
-A programme to take Data collected from the users input and transformed it into a PDF using PHP, including a photo and clickable links. This gives the user an option to quickly generate a CV, even while on the go and have it emailed to them or another address.
+A programme to take Data collected from the users input and transformed it into a PDF using PHP, including a photo and clickable links. This gives the user an option to quickly generate a CV, even while on the go and have it emailed to them or another address. This project uses the FPDF php library http://www.fpdf.org/
 
 Futher development would see options saved locally, and perhaps online in a DB with login access to make it easier to change details. I would also like to offer more Designs for users to pick from.
 
@@ -19,6 +19,7 @@ Futher development would see options saved locally, and perhaps online in a DB w
 - [ ] Check longer inputs and contraints
 - [ ] Change longer names to Initials
 - [ ] Make Pdf Prettier
+- [ ] Look at TCPDF to see if this will help for layout https://tcpdf.org/
 
 ### Further Development
 - [ ] Add more designs the user can choose from
